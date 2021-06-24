@@ -5,7 +5,7 @@ function parseStripeDateFormat(dateString) {
 }
 export function sortBySubscriptionDate(input) {
   return input.sort(
-    (a, b) => new Date(a.subscribeDate) - new Date(b.subscribeDate),
+    (a, b) => new Date(b.subscribeDate) - new Date(a.subscribeDate),
   );
 }
 
@@ -28,7 +28,7 @@ export function filterToFirstNameStartingWithB(input) {
 export function filterToCreatedAfter2010(input) {
   return input.filter((user) => {
     const date = parseStripeDateFormat(user.created_at_date);
-    return date >= new Date('2010-01-01');
+    return date < new Date('2008-01-01') || date > new Date('2015-01-01');
   });
 }
 
