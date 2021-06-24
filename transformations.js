@@ -1,4 +1,8 @@
-// Codealong: Data Sorting and Filtering in Node.js
+import { parse } from 'date-fns';
+
+function parseStripeDateFormat(dateString) {
+  return parse(dateString, 'dd/MM/yyyy HH:mm:ss', new Date());
+}
 export function sortBySubscriptionDate(input) {
   return input.sort(
     (a, b) => new Date(a.subscribeDate) - new Date(b.subscribeDate),
@@ -18,11 +22,14 @@ export function sortByFirstName(input) {
 }
 
 export function filterToFirstNameStartingWithB(input) {
-  return input;
+  return input.filter((user) => user['First Name'].startsWith('B'));
 }
 
 export function filterToCreatedAfter2010(input) {
-  return input;
+  return input.filter((user) => {
+    const date = parseStripeDateFormat(user.created_at_date);
+    return date >= new Date('2010-01-01');
+  });
 }
 
 // Codealong: Data Aggregation, Deduplication and Cleansing in Node.js
